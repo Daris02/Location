@@ -2,13 +2,13 @@ import { log } from "console";
 import { addThings, cancelReservation, makeLocation, showAllThingsReserved, showAllThingsWithState } from "./Location";
 import { createInterface } from "readline/promises";
 import { stdin as input, stdout as output } from "process";
-import { logWarning } from "./config/config";
+import { logInfo, logWarning } from "./config/config";
 
 export const readline = createInterface({ input, output });
 
 async function main() {
   log("\n----------------------------");
-  log("🤗 Welcome to Locationable");
+  logInfo("🤗 Welcome to Locationable");
   log("----------------------------");
   log("1. All Things.")
   log("2. Add Things.")

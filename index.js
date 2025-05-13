@@ -9,7 +9,7 @@ const config_1 = require("./config/config");
 exports.readline = (0, promises_1.createInterface)({ input: process_1.stdin, output: process_1.stdout });
 async function main() {
     (0, console_1.log)("\n----------------------------");
-    (0, console_1.log)("🤗 Welcome to Locationable");
+    (0, config_1.logInfo)("🤗 Welcome to Locationable");
     (0, console_1.log)("----------------------------");
     (0, console_1.log)("1. All Things.");
     (0, console_1.log)("2. Add Things.");
