@@ -1,35 +1,65 @@
-#!/usr/bin/env node
-import { Command } from "commander";
-import { makeLocation, showAllThingsWithState } from "./Location";
+import { log } from "console";
+import { addThings, cancelReservation, makeLocation, showAllThingsReserved, showAllThingsWithState } from "./Location";
+import { createInterface } from "readline/promises";
+import { stdin as input, stdout as output } from "process";
+import { logWarning } from "./config/config";
 
-const program = new Command();
+export const readline = createInterface({ input, output });
 
-program
-  .command("make")
-  .description("Make location for something")
-  .option("-t, --thing <t|thing>", "The thing to make a location for")
-  .action((thing) => {
-    let t = Object.values(thing).toString();
-    makeLocation(t);
-  });
+async function main() {
+  log("\n----------------------------");
+  log("🤗 Welcome to Locationable");
+  log("----------------------------");
+  log("1. All Things.")
+  log("2. Add Things.")
+  log("3. Make Location.")
+  log("4. Cancel reservation.")
+  log("5. Exit.")
+  const userInput = await readline.question("Please enter your choice: ");
 
-program
-  .command("things")
-  .description("Show all things in database")
-  .option("--show <show>", "The thing to make a location for")
-  .action(() => {
-    showAllThingsWithState();
-  });
+  switch (userInput) {
+    case "1":
+      showAllThingsWithState();
+      let choice = await readline.question("Do you want reserve? (y/n): ");
+      if (choice.toLowerCase() === "y") {
+        let name = await readline.question("Enter the name of the thing: ");
+        makeLocation(name);
+      }
+      main();
+      break;
 
-program.on("command:*", ([cmd]) => {
-  console.error(`Error: Unknown command '${cmd}'`);
-  if (cmd == null) program.outputHelp();
-  program.outputHelp();
-  process.exit(1);
-});
+    case "2":
+      let thingName = await readline.question("Enter the name of the thing (REQUIRED): ");
+      let description = await readline.question("Enter the description of the thing: ");
+      if (!addThings(thingName, description)) {
+        logWarning('⚠️ Please retry again!!!')
+      }
+      main()
+      break;
 
-program.parse(process.argv);
+    case "3":
+      let reserveName = await readline.question("Enter name of thing you want to reserved: ");
+      makeLocation(reserveName);
+      main();
+      break;
 
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
+    case "4":
+      if (showAllThingsReserved() == 0) main();
+      let cancelName = await readline.question("Enter name of thing you want to cancel: ");
+      cancelReservation(cancelName);
+      main();
+      break;
+    
+    case "5":
+      log("Goodbye! 👋👋👋");
+      readline.close();
+      break;
+
+    default:
+      log("Invalid choice.");
+      readline.close();
+      break;
+  }
 }
+
+main();

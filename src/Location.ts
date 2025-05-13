@@ -1,24 +1,79 @@
-import Car from "./types/Car";
-import House from "./types/House";
-import Locationable from "./types/Locationable";
+import { log } from "console";
+import Locationable from "./Locationable";
+import { logError, logInfo, logSuccess, logWarning } from "./config/config";
 
-var car = new Car("car", "car description");
-var house = new House("house", "house description");
+var car = new Locationable("Car", "car description");
+var house = new Locationable("House", "house description");
 var allThings = [car, house];
 
-export function makeLocation(thing?: string) {
-  console.log("Location: make ... -> " + thing);
-}
-
-export function showAllThingsWithState() {
-  console.log("All Locationable things with state:");
-  for (let i = 0; i < allThings.length; i++) {
-    const thing = allThings[i];
-    console.log('\t- '+thing.toString());
+export function makeLocation(name: string) {
+  const thing = allThings.find(thing => thing.name === name);
+  if (thing && thing.state === "Libre") {
+    thing.setReserver();
+    logSuccess(`✅ ${name} reserved.`);
+    return;
+  }
+  if (thing && thing.state === "Reserver") {
+    logError(`❌ ${name} already reserved.`);
+    return;
+  } else {
+    logError(`${name} not found.`);
+    return;
   }
 }
 
-function addThings(thing: Locationable) {
-  allThings.push(thing);
-  console.log("Add locationable things: " + thing);
+export function showAllThingsWithState() {
+  logInfo("All Locationable things with state:");
+  for (let i = 0; i < allThings.length; i++) {
+    const thing = allThings[i];
+    log('\t- '+thing.toString());
+  }
+}
+export function showAllThingsReserved() {
+  logInfo("All Locationable things reserved:");
+  const allThingsReserved = allThings.filter(thing => thing.state === "Reserver");
+  if (allThingsReserved.length == 0) {
+    logInfo("No things reserved.");
+    return 0;
+  }
+  for (let i = 0; i < allThingsReserved.length; i++) {
+    const thing = allThingsReserved[i];
+    log('\t- '+thing.toString());
+  }
+}
+
+export async function addThings(name, description) {
+  if(!name) {
+    logError("Name are required.");
+    return false;
+  }
+
+  if (allThings.find(thing => thing.name === name)) {
+    logWarning(`${name} already exists.`);
+    return false;
+  }
+  
+  const newThing = new Locationable(name, description);
+  allThings.push(newThing);
+  logSuccess(`✅ ${name} added successfully.`);
+  return true;
+}
+
+export function cancelReservation(name) {
+  const thing = allThings.find(thing => thing.name === name);
+  if (!thing) {
+    logError(`${name} not found.`);
+    return;
+  }
+  
+  if (thing && thing.state === "Libre") {
+    logError(`❌ ${name} is not reserved.`);
+    return;
+  }
+
+  if (thing && thing.state === "Reserver") {
+    thing.setLiberer();
+    logSuccess(`✅ ${name} reservation cancelled.`);
+    return;
+  }
 }

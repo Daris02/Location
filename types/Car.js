@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Car {
     constructor(name, description) {
         this.name = name;
-        this.description = description || '';
+        this.description = description || "";
         this.isLocal = false;
     }
     setLouer() {
