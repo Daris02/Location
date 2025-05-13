@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsc index.ts && node index.js"
+    "dev": "npx tsc --watch",
+    "start": "tsc index.ts && node index.js",
+    "build": "tsc index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "commander": "^13.1.0",
-    "typescript": "^5.8.3"
+    "commander": "^13.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.17"
+    "@types/node": "^22.15.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
