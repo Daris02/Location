@@ -133,7 +133,7 @@ public class LocationableApp {
 
   public void cancelReservation(String name) {
     Optional<Locationable> thing = allThings.stream()
-        .filter(t -> t.getName().equals(name))
+        .filter(t -> t.getName().equalsIgnoreCase(name))
         .findFirst();
     if (!thing.isPresent()) {
       logError("❌ " + name + " not found.");
