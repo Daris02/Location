@@ -6,15 +6,15 @@ export default class Locationable {
   constructor(name: string, description?: string) {
     this.name = name;
     this.description = description || '';
-    this.state = "Libre";
+    this.state = "Free";
   }
 
   setReserver() {
-    return this.state = "Reserver";
+    return this.state = "Reserved";
   }
   
-  setLiberer() {
-    return this.state = "Libre";
+  setFree() {
+    return this.state = "Free";
   };
 
   toString() {

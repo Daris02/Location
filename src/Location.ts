@@ -2,18 +2,18 @@ import { log } from "console";
 import Locationable from "./Locationable";
 import { logError, logInfo, logSuccess, logWarning } from "./config/config";
 
-var car = new Locationable("Car", "car description");
-var house = new Locationable("House", "house description");
+var car = new Locationable("Car BMW", "car description");
+var house = new Locationable("House Tana", "house description");
 var allThings = [car, house];
 
 export function makeLocation(name: string) {
   const thing = allThings.find(thing => thing.name === name);
-  if (thing && thing.state === "Libre") {
+  if (thing && thing.state === "Free") {
     thing.setReserver();
     logSuccess(`✅ ${name} reserved.`);
     return;
   }
-  if (thing && thing.state === "Reserver") {
+  if (thing && thing.state === "Reserved") {
     logError(`❌ ${name} already reserved.`);
     return;
   } else {
@@ -31,7 +31,7 @@ export function showAllThingsWithState() {
 }
 export function showAllThingsReserved() {
   logInfo("All Locationable things reserved:");
-  const allThingsReserved = allThings.filter(thing => thing.state === "Reserver");
+  const allThingsReserved = allThings.filter(thing => thing.state === "Reserved");
   if (allThingsReserved.length == 0) {
     logInfo("No things reserved.");
     return 0;
@@ -66,13 +66,13 @@ export function cancelReservation(name) {
     return;
   }
   
-  if (thing && thing.state === "Libre") {
+  if (thing && thing.state === "Free") {
     logError(`❌ ${name} is not reserved.`);
     return;
   }
 
-  if (thing && thing.state === "Reserver") {
-    thing.setLiberer();
+  if (thing && thing.state === "Reserved") {
+    thing.setFree();
     logSuccess(`✅ ${name} reservation cancelled.`);
     return;
   }
