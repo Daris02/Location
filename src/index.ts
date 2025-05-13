@@ -1,23 +1,29 @@
 #!/usr/bin/env node
-import { Command } from 'commander';
+import { Command } from "commander";
+import { makeLocation, showAllThingsWithState } from "./Location";
 
 const program = new Command();
 
-function makeLocation(thing: string) {
-    console.log("Location: make");
-}
-
 program
-  .command('')
-  .description('Make location for something')
-  .option('-t <thing>', 'Thing')
-  .action((t) => {
-    let thing = Object.values(t).toString();
-    makeLocation(thing);
+  .command("make")
+  .description("Make location for something")
+  .option("-t, --thing <t|thing>", "The thing to make a location for")
+  .action((thing) => {
+    let t = Object.values(thing).toString();
+    makeLocation(t);
   });
 
-program.on('command:*', ([cmd]) => {
+program
+  .command("things")
+  .description("Show all things in database")
+  .option("--show <show>", "The thing to make a location for")
+  .action(() => {
+    showAllThingsWithState();
+  });
+
+program.on("command:*", ([cmd]) => {
   console.error(`Error: Unknown command '${cmd}'`);
+  if (cmd == null) program.outputHelp();
   program.outputHelp();
   process.exit(1);
 });

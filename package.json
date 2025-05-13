@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsc --watch",
-    "start": "tsc index.ts && node index.js",
+    "start": "node index.js",
     "build": "tsc index.ts"
   },
   "keywords": [],
