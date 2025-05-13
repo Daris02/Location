@@ -1,23 +1,27 @@
 export default class Locationable {
   name: string;
   description?: string;
-  state: string;
+  state: boolean;
 
   constructor(name: string, description?: string) {
     this.name = name;
     this.description = description || '';
-    this.state = "Free";
+    this.state = true;
   }
 
   setReserver() {
-    return this.state = "Reserved";
+    return this.state = false;
   }
   
-  setFree() {
-    return this.state = "Free";
+  setAvailable() {
+    return this.state = true;
   };
 
+  isAvailable() {
+    return this.state;
+  }
+
   toString() {
-    return `Name: ${this.name}, Description: ${this.description}, State: ${this.state}`;
+    return `${this.name} (${this.description}) - [${this.state ? "🟢 Available" :  "❌ Reserved"}]`;
   }
 }

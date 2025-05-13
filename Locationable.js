@@ -4,17 +4,20 @@ class Locationable {
     constructor(name, description) {
         this.name = name;
         this.description = description || '';
-        this.state = "Libre";
+        this.state = true;
     }
     setReserver() {
-        return this.state = "Reserver";
+        return this.state = false;
     }
-    setLiberer() {
-        return this.state = "Libre";
+    setAvailable() {
+        return this.state = true;
     }
     ;
+    isAvailable() {
+        return this.state;
+    }
     toString() {
-        return `Name: ${this.name}, Description: ${this.description}, State: ${this.state}`;
+        return `${this.name} (${this.description}) - [${this.state ? "🟢 Available" : "❌ Reserved"}]`;
     }
 }
 exports.default = Locationable;
