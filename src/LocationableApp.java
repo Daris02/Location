@@ -108,19 +108,19 @@ public class LocationableApp {
       logWarning("⚠️ " + name + " not found.");
       return;
     }
-    if (thing.get().getState()) {
-      logError("❌ " + name + " is already reserved.");
+    if (!thing.get().isAvailable()) {
+      logError("❌ " + thing.get().getName() + " is already reserved.");
       return;
     }
 
-    thing.get().setState(true);
-    logSuccess("✅ " + name + " has been reserved.");
+    thing.get().setReserved();
+    logSuccess("✅ " + thing.get().getName() + " has been reserved.");
   }
 
   public int showAllThingsReserved() {
     List<Locationable> reservedThings;
     reservedThings = allThings.stream()
-        .filter(t -> t.getState())
+        .filter(t -> !t.isAvailable())
         .toList();
     if (reservedThings.isEmpty()) {
       logInfo("No reserved things found.");
@@ -139,8 +139,8 @@ public class LocationableApp {
       logError("❌ " + name + " not found.");
       return;
     }
-    thing.get().setState(false);
-    logSuccess("✅ " + name + " reservation has been cancelled.");
+    thing.get().setAvailable();
+    logSuccess("✅ " + thing.get().getName() + " reservation has been cancelled.");
   }
 
   public void logError(String msg) {

@@ -6,11 +6,15 @@ public class Locationable {
   public Locationable(String name, String description) {
     this.name = name;
     this.description = description;
+    this.state = true;
+  }
+
+  public void setReserved() {
     this.state = false;
   }
 
-  public void setState(boolean state) {
-    this.state = state;
+  public void setAvailable() {
+    this.state = true;
   }
 
   public String getName() {
@@ -21,13 +25,13 @@ public class Locationable {
     return description;
   }
 
-  public boolean getState() {
+  public boolean isAvailable() {
     return state;
   }
 
   @Override
   public String toString() {
-    return name + " - [" + (state ? "\u001B[31m Reserved \u001B[0m]" : "\u001B[32m Free \u001B[0m]") + ", Description: " + description;
+    return name + "(" + description + ") - [" + (state ? "\u001B[32m Available \u001B[0m" :  "\u001B[31m Reserved \u001B[0m") + "]";
   }
 
   @Override
