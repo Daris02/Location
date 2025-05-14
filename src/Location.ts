@@ -10,11 +10,11 @@ export function makeLocation(name: string) {
   const thing = allThings.find((thing) => thing.name.toLowerCase() === name.toLowerCase());
   if (thing && thing.isAvailable()) {
     thing.setReserver();
-    logSuccess(`✅ ${thing.name} reserved.`);
+    logSuccess(`${thing.name} reserved.`);
     return;
   }
   if (thing && !thing.isAvailable()) {
-    logError(`🐞 ${thing.name} already reserved.`);
+    logError(`${thing.name} already reserved.`);
     return;
   } else {
     logError(`${name} not found.`);
@@ -51,31 +51,31 @@ export async function addThings(name, description) {
   }
 
   if (allThings.find((thing) => thing.name.toLowerCase === name.toLowerCase())) {
-    logWarning(`⚠️ ${name} already exists.`);
+    logWarning(`${name} already exists.`);
     return false;
   }
 
   const newThing = new Locationable(name, description);
   allThings.push(newThing);
-  logSuccess(`✅ ${name} added successfully.`);
+  logSuccess(`${name} added successfully.`);
   return true;
 }
 
 export function cancelReservation(name) {
   const thing = allThings.find((thing) => thing.name.toLowerCase() === name.toLowerCase());
   if (!thing) {
-    logError(`🐞 ${name} not found.`);
+    logError(`${name} not found.`);
     return;
   }
 
   if (thing && thing.isAvailable()) {
-    logError(`🐞 ${name} is not reserved.`);
+    logError(`${name} is not reserved.`);
     return;
   }
 
   if (thing && !thing.isAvailable()) {
     thing.setAvailable();
-    logSuccess(`✅ ${name} reservation cancelled.`);
+    logSuccess(`${name} reservation cancelled.`);
     return;
   }
 }

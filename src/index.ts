@@ -8,7 +8,7 @@ export const readline = createInterface({ input, output });
 
 async function main() {
   log("\n----------------------------");
-  logInfo("🤗 Welcome to Locationable");
+  logInfo("Welcome to Locationable");
   log("----------------------------");
   log("1. All Things.")
   log("2. Add Things.")
@@ -32,7 +32,7 @@ async function main() {
       let thingName = await readline.question("Enter the name of the thing (REQUIRED): ");
       let description = await readline.question("Enter the description of the thing: ");
       if (!addThings(thingName, description)) {
-        logWarning('⚠️ Please retry again!!!')
+        logWarning('Please retry again!!!')
       }
       main()
       break;
@@ -51,7 +51,7 @@ async function main() {
       break;
     
     case "5":
-      log("Goodbye! 👋👋👋");
+      log("Goodbye!");
       readline.close();
       break;
 

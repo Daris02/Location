@@ -9,7 +9,7 @@ const config_1 = require("./config/config");
 exports.readline = (0, promises_1.createInterface)({ input: process_1.stdin, output: process_1.stdout });
 async function main() {
     (0, console_1.log)("\n----------------------------");
-    (0, config_1.logInfo)("🤗 Welcome to Locationable");
+    (0, config_1.logInfo)("Welcome to Locationable");
     (0, console_1.log)("----------------------------");
     (0, console_1.log)("1. All Things.");
     (0, console_1.log)("2. Add Things.");
@@ -31,7 +31,7 @@ async function main() {
             let thingName = await exports.readline.question("Enter the name of the thing (REQUIRED): ");
             let description = await exports.readline.question("Enter the description of the thing: ");
             if (!(0, Location_1.addThings)(thingName, description)) {
-                (0, config_1.logWarning)('⚠️ Please retry again!!!');
+                (0, config_1.logWarning)('Please retry again!!!');
             }
             main();
             break;
@@ -48,7 +48,7 @@ async function main() {
             main();
             break;
         case "5":
-            (0, console_1.log)("Goodbye! 👋👋👋");
+            (0, console_1.log)("Goodbye!");
             exports.readline.close();
             break;
         default:

@@ -22,6 +22,6 @@ export default class Locationable {
   }
 
   toString() {
-    return `${this.name} (${this.description}) - [${this.state ? "🟢 Available" :  "❌ Reserved"}]`;
+    return `${this.name} (${this.description}) - [${this.state ? "Available" :  "Reserved"}]`;
   }
 }

@@ -18,11 +18,11 @@ function makeLocation(name) {
     const thing = allThings.find((thing) => thing.name.toLowerCase() === name.toLowerCase());
     if (thing && thing.isAvailable()) {
         thing.setReserver();
-        (0, config_1.logSuccess)(`✅ ${thing.name} reserved.`);
+        (0, config_1.logSuccess)(`${thing.name} reserved.`);
         return;
     }
     if (thing && !thing.isAvailable()) {
-        (0, config_1.logError)(`🐞 ${thing.name} already reserved.`);
+        (0, config_1.logError)(`${thing.name} already reserved.`);
         return;
     }
     else {
@@ -55,27 +55,27 @@ async function addThings(name, description) {
         return false;
     }
     if (allThings.find((thing) => thing.name.toLowerCase === name.toLowerCase())) {
-        (0, config_1.logWarning)(`⚠️ ${name} already exists.`);
+        (0, config_1.logWarning)(`${name} already exists.`);
         return false;
     }
     const newThing = new Locationable_1.default(name, description);
     allThings.push(newThing);
-    (0, config_1.logSuccess)(`✅ ${name} added successfully.`);
+    (0, config_1.logSuccess)(`${name} added successfully.`);
     return true;
 }
 function cancelReservation(name) {
     const thing = allThings.find((thing) => thing.name.toLowerCase() === name.toLowerCase());
     if (!thing) {
-        (0, config_1.logError)(`🐞 ${name} not found.`);
+        (0, config_1.logError)(`${name} not found.`);
         return;
     }
     if (thing && thing.isAvailable()) {
-        (0, config_1.logError)(`🐞 ${name} is not reserved.`);
+        (0, config_1.logError)(`${name} is not reserved.`);
         return;
     }
     if (thing && !thing.isAvailable()) {
         thing.setAvailable();
-        (0, config_1.logSuccess)(`✅ ${name} reservation cancelled.`);
+        (0, config_1.logSuccess)(`${name} reservation cancelled.`);
         return;
     }
 }
