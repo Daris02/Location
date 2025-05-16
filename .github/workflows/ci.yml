@@ -2,9 +2,9 @@ name: Lint Check
 
 on:
   push:
-    branches: [typescript]
+    branches: [prog-5-ussd]
   pull_request:
-    branches: [typescript]
+    branches: [prog-5-ussd]
 
 jobs:
   lint:
