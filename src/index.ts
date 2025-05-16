@@ -38,7 +38,7 @@ async function main() {
   const userInput = await askWithTimeout('Please enter your choice: ');
 
   switch (userInput) {
-    case '1':
+    case '1': {
       showAllThingsWithState();
       const choice = await askWithTimeout('Do you want reserve? (y/n): ');
       if (choice && choice.toLowerCase() === 'y') {
@@ -52,8 +52,9 @@ async function main() {
       }
       main();
       break;
+    }
 
-    case '2':
+    case '2': {
       const thingName = await askWithTimeout('Enter the name of the thing (REQUIRED): ');
       let description = await askWithTimeout('Enter the description of the thing: ');
       if (!thingName) {
@@ -65,8 +66,9 @@ async function main() {
       if (!addThings(thingName, description)) logWarning('Please retry again!!!');
       main();
       break;
+    }
 
-    case '3':
+    case '3': {
       const reserveName = await askWithTimeout('Enter name of thing you want to reserved: ');
       if (!reserveName) {
         logError('Name are required.');
@@ -76,8 +78,9 @@ async function main() {
       makeLocation(reserveName);
       main();
       break;
+    }
 
-    case '4':
+    case '4': {
       if (showAllThingsReserved() == 0) main();
       const cancelName = await askWithTimeout('Enter name of thing you want to cancel: ');
       if (!cancelName) {
@@ -88,6 +91,7 @@ async function main() {
       cancelReservation(cancelName);
       main();
       break;
+    }
 
     case '5':
       log('Goodbye!');

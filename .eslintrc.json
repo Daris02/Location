@@ -19,6 +19,7 @@
     "quotes": [
       "error",
       "single"
-    ]
+    ],
+    "no-case-declarations": "off"
   }
 }
