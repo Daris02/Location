@@ -12,7 +12,7 @@ importers:
         specifier: ^9.26.0
         version: 9.26.0
       '@types/node':
-        specifier: ^22.15.17
+        specifier: ^22.15.18
         version: 22.15.18
       eslint:
         specifier: ^9.26.0

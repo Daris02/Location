@@ -3,3 +3,4 @@ node_modules/
 NOTE.txt
 .dart_tool/
 bin/
+dist/
